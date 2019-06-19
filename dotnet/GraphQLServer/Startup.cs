@@ -1,5 +1,7 @@
 using GoT;
 using GoT.GoTTypes.Character;
+using GoT.GoTTypes.Houses;
+using GoT.GoTTypes.Castles;
 using GraphQL;
 using GraphQL.Http;
 using GraphQL.Types;
@@ -24,6 +26,8 @@ namespace GraphQLServer
             services.AddSingleton<GotMutation>();
             services.AddSingleton<CharacterInputType>();
             services.AddSingleton<CharacterType>();
+            services.AddSingleton<HouseType>();
+            services.AddSingleton<CastleType>();
             services.AddSingleton<ISchema, GoTSchema>();
             services.AddCors(options =>
                 options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()

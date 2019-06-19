@@ -34,16 +34,73 @@ namespace GoT
         public IEnumerable<Character> GetCharacters()
         {
             return _characters;
-        }
+        }  
 
         public Character GetCharacterById(string id)
         {
             return _characters.Find(x => x.Id == id);
         }
 
+        public Character GetCharacter(string name)
+        {
+            return _characters.Find(x => x.Name == name);
+        }
+
+        public Character PushCharacterFromWindow(string name)
+        {
+            Character character = GetCharacter(name);
+            character.IsHealthy = false;
+            return character;
+        }
+
         public IEnumerable<Character> GetSiblings(Character character)
         {
             return character?.SiblingIds?.Select(GetCharacterById);
+        }
+
+        public IEnumerable<Character> GetSpouses(Character character)
+        {
+            return character?.SpouseIds?.Select(GetCharacterById);
+        }
+
+        public IEnumerable<Character> GetLovers(Character character)
+        {
+            return character?.LoverIds?.Select(GetCharacterById);
+        }
+
+        public IEnumerable<House> GetAllegiances(Character character)
+        {
+            return character?.Allegiances?.Select(GetHouseByName);
+        }
+
+        public IEnumerable<Castle> GetCastles()
+        {
+            return _castles;
+        }
+
+        public House GetHouseById(string id)
+        {
+            return _houses.Find(x => x.Id == id);
+        }
+
+        public House GetHouseByName(string name)
+        {
+            return _houses.Find(x => x.Name == name);
+        }
+
+        public IEnumerable<House> GetHouses()
+        {
+            return _houses;
+        }
+
+        public IEnumerable<House> GetAllegion(House house)
+        {
+            return house?.AllegionHouseIds?.Select(GetHouseById);
+        }
+
+        public IEnumerable<Character> GetHouseMembers(House house)
+        {
+            return _characters?.FindAll(x=>x.HouseId == house.Id);
         }
     }
 }
